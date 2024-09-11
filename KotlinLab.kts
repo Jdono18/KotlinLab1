@@ -32,12 +32,12 @@ var price = 234.56
 // TODO write a comment and explain why the following line is an error
 //product = "Motherboard"
 
-// the product is not defined as a constant value or a variable using val or var.  It must first be created.
+// the line above is an error because the product variable above was created using val product (constant).  
 
 // TODO write a comment and explain why the following line is an error
 //product = null
 
-// the product is not defined using var or val
+// Kotlin will not allow you to change values to null without specifying this behavior as allowed by using null safety operators.  It is also defined as a constant.  
 
 // TODO print a message, using the variables declared above, and template string
 //  "The product name is Graphics Card, the manufacturer is NVIDIA, the quantity available is 20, and the price each is $234.56"
@@ -95,16 +95,14 @@ println("The price of the $manufacturer $product is $$price so it is $descriptio
 //  have the same number of letters, but "Cat" is the first argument.
 
 fun lengthCompare(string1: String, string2: String): String {
-    var answer = ""
-    if (string1.length < string2.length)
-        println(string2)
-    //else if (string1.length > string2.length)
-    //  println(string1)
-    else {
-        (string1.length == string2.length)
-        println(string1)
+    if (string1.length < string2.length) {
+        return string2
+    } else if (string1.length > string2.length) {
+        return string1
+    } else if (string1.length == string2.length) {
+        return string1
     }
-    return answer
+    return String()
 }
 
 val stringComparison = lengthCompare("Dog", "Cat")
@@ -149,8 +147,9 @@ println(mutableTrees)
 
 // TODO print the name of each tree, one per line.
 
-for (tree in trees)
+for (tree in trees) {
     println(tree)
+}
 
 /** Maps **/
 
@@ -182,11 +181,11 @@ println("There are $numPineTrees state trees that are types of Pine tree in this
 
 // TODO using the stateTrees map, read California's state tree, and print the name of that tree in uppercase.
 //  If that tree is not found in the map, print "No Tree Found".
-println(stateTrees.getOrDefault("California".uppercase(), "No Tree Found."))
-println(stateTrees["California"]?.uppercase())  // uses null safety operator
+// println(stateTrees.getOrDefault("California".uppercase(), "No Tree Found."))
+println(stateTrees["California"]?.uppercase() ?: "No Tree Found")  // uses null safety operator and Elvis operator to print "No Tree Found". 
 
 
 // TODO what type of data is returned for the value? Explain why it isn't a String.
-// the value returned is null because there is no "California" key within the map stateTrees.
-// A string is not returned because while there is a valid mutable map with key-value pairs that
-// is a string type, this specific key reference is null.  
+
+// the value defined by the Elvis operator is returned in the statement above.  This is a nullable string because both the null safety operator and the 
+// elvis operator are used in this statement.  Also there is no "California" key present within the mutable list.  
